@@ -1,0 +1,4 @@
+.venv
+.env
+src/ops_agent.egg-info
+.vscode
