@@ -1,11 +1,11 @@
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from .state import AgentState
 from ops_agent.tools.network import ping_host
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode, tools_condition
 
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = ChatOllama(model="llama3.2", temperature=0)
 llm_with_tools = llm.bind_tools([ping_host])
 
 def agent_node(state: AgentState):

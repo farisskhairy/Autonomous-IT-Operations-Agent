@@ -2,3 +2,4 @@
 .env
 src/ops_agent.egg-info
 .vscode
+*__pycache__
