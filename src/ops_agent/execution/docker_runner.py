@@ -10,7 +10,7 @@ class DockerSandbox:
     def run_command(self, command: str) -> str:
         try:
             raw_output = self.client.containers.run(
-                image="ubuntu:latest",
+                image="alpine:latest",
                 command=command,
                 remove=True,
                 stdout=True,
