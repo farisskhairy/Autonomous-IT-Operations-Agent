@@ -1,19 +1,19 @@
 from langchain_ollama import ChatOllama
 from .state import AgentState
-from ops_agent.tools.network import ping_host
+from ops_agent.tools.network import ping_host, scan_port, check_web_service
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode, tools_condition
 
 
 llm = ChatOllama(model="llama3.2", temperature=0)
-llm_with_tools = llm.bind_tools([ping_host])
+llm_with_tools = llm.bind_tools([ping_host, scan_port, check_web_service])
 
 def agent_node(state: AgentState):
     response = llm_with_tools.invoke(state["messages"])
 
     return {"messages": [response], "sender": "agent"}
 
-tool_node = ToolNode([ping_host])
+tool_node = ToolNode([ping_host, scan_port, check_web_service])
 
 builder = StateGraph(AgentState)
 
